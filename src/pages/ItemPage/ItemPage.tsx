@@ -37,7 +37,7 @@ export default function ItemPage() {
             <NewsBlock>
               <NewsTitle>{itemNews.title}</NewsTitle>
               <NewsInfo>
-                {typeof itemNews?.url !== 'undefined' && itemNews?.url.indexOf('item?id=') == -1 ? (
+                {itemNews?.url && !itemNews.url.includes('item?id=') ? (
                   <p>
                     Link: <a href={itemNews?.url}>{itemNews?.url}</a>
                   </p>
