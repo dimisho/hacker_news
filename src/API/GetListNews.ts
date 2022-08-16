@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FeedItemSchema } from '../Schemes/FeedItemSchema';
+import { FeedItemSchema } from 'schemes/FeedItemSchema';
 
 const instance = axios.create({
   baseURL: 'https://api.hnpwa.com/v0/newest',

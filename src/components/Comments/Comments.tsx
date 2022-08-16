@@ -1,5 +1,5 @@
 import React from 'react';
-import { ItemSchema } from '../../Schemes/ItemSchema';
+import { ItemSchema } from 'schemes/ItemSchema';
 import Comment from './Comment';
 import { CommentsList } from './Styles/CommentsStyles';
 

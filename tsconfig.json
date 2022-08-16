@@ -17,7 +17,14 @@
     "jsx": "react-jsx",
     "jsxFactory": "",
     "jsxFragmentFactory": "",
-    "noImplicitAny": false
+    "noImplicitAny": false,
+    "baseUrl": "./src",
+    "paths": {
+      "components/*": ["components/*"],
+      "pages/*": ["pages/*"],
+      "API/*": ["API/*"],
+      "schemes/*": ["Schemes/*"]
+    }
   },
-  "include": ["./src/**/*.ts", "src/index.tsx"]
+  "include": ["./src/**/*.ts", "src/index.tsx", "src/API/GetListNews.tsx", "src/API/GetItemNews.tsx"]
 }

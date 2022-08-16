@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import GetItemNews from '../../API/GetItemNews';
-import { ItemSchema } from '../../Schemes/ItemSchema';
+import GetItemNews from 'API/GetItemNews';
+import { ItemSchema } from 'schemes/ItemSchema';
 import { Main, Card, CardBody, BackButton, NewsBlock, NewsInfo, NewsTitle, UpdateItemButton } from './ItemPageStyles';
-
-import Comments from '../../components/Comments/Comments';
+import Comments from 'components/Comments/Comments';
 
 export default function ItemPage() {
   const [itemNews, setItemNews] = useState<ItemSchema>();

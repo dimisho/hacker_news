@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { CommentBlock, AuthorComment, ShowMoreButton } from './Styles/CommentStyles';
-import { ItemSchema } from '../../Schemes/ItemSchema';
+import { ItemSchema } from 'schemes/ItemSchema';
 
 interface CommentProps {
   comment: ItemSchema;

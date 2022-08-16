@@ -1,10 +1,10 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import HomePage from '../../pages/HomePage/HomePage';
-import ItemPage from '../../pages/ItemPage/ItemPage';
+import HomePage from 'pages/HomePage/HomePage';
+import ItemPage from 'pages/ItemPage/ItemPage';
 
-export default function RoutesComponent() {
+const RoutesComponent = () => {
   return (
     <BrowserRouter>
       <Routes>
@@ -13,4 +13,6 @@ export default function RoutesComponent() {
       </Routes>
     </BrowserRouter>
   );
-}
+};
+
+export default RoutesComponent;

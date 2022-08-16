@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import GetListNews from '../../API/GetListNews';
-import { FeedItemSchema } from '../../Schemes/FeedItemSchema';
+import GetListNews from 'API/GetListNews';
+import { FeedItemSchema } from 'schemes/FeedItemSchema';
 import { Main, Card, CardBody, NewsNumber, NewsInfo, NewsBlock, UpdateNewsButton } from './HomePageStyles';
 
 export default function HomePage() {
