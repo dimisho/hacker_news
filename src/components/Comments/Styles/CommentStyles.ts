@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const CommentBlock = styled.div`
+export const CommentBlock = styled.div<{ marginLeft: `${number}px` }>`
   background-color: Khaki;
   border-radius: 5px;
   padding: 5px;

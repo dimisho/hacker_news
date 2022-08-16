@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
 import { CommentBlock, AuthorComment, ShowMoreButton } from './Styles/CommentStyles';
+import { ItemSchema } from '../../Schemes/ItemSchema';
 
-export default function Comment({ comment, propsMarginLeft }) {
+interface CommentProps {
+  comment: ItemSchema;
+  propsMarginLeft?: `${number}px`;
+}
+const Comment: React.FC<CommentProps> = ({ comment, propsMarginLeft = '0px' }) => {
   const [commentTree, setCommentTree] = useState(false);
   return (
-    <CommentBlock marginLeft={typeof propsMarginLeft !== 'undefined' ? propsMarginLeft : '0px'}>
+    <CommentBlock marginLeft={propsMarginLeft}>
       <AuthorComment>
         {comment.user} | {comment.time_ago}
       </AuthorComment>
@@ -22,4 +27,6 @@ export default function Comment({ comment, propsMarginLeft }) {
         comment.comments.map((comment) => <Comment comment={comment} propsMarginLeft="20px" key={comment.id} />)}
     </CommentBlock>
   );
-}
+};
+
+export default Comment;

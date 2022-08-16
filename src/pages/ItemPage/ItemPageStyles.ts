@@ -7,7 +7,7 @@ export const Main = styled.div`
   width: 100%;
 `;
 
-export const Card = styled.div`
+export const Card = styled.div<{ bgColor: string }>`
   background-color: ${(props) => props.bgColor};
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
   border-radius: 5px;

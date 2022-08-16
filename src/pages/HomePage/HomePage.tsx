@@ -6,7 +6,7 @@ import { Main, Card, CardBody, NewsNumber, NewsInfo, NewsBlock, UpdateNewsButton
 
 export default function HomePage() {
   const [news, setNews] = useState<FeedItemSchema[]>([]);
-  const [updater, setUpdater] = useState<boolean>(false);
+  const [updater, setUpdater] = useState(false);
 
   const GetResponse = async () => {
     const response = await GetListNews();
