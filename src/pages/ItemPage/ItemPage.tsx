@@ -4,16 +4,19 @@ import GetItemNews from 'API/GetItemNews';
 import { ItemSchema } from 'schemes/ItemSchema';
 import { Main, Card, CardBody, BackButton, NewsBlock, NewsInfo, NewsTitle, UpdateItemButton } from './ItemPageStyles';
 import Comments from 'components/Comments/Comments';
+import Loader from 'components/Loader/Loader';
 
 export default function ItemPage() {
   const [itemNews, setItemNews] = useState<ItemSchema>();
   const [updater, setUpdater] = useState<boolean>(false);
+  const [loader, setLoader] = useState(true);
   const { id } = useParams();
 
   useEffect(() => {
     const GetResponse = async () => {
       const response = await GetItemNews(id);
       setItemNews(response.data);
+      setLoader(false);
     };
     GetResponse();
     const timer = setInterval(() => {
@@ -24,13 +27,13 @@ export default function ItemPage() {
 
   return (
     <Main>
-      {itemNews && (
+      {itemNews && !loader && (
         <Card>
           <CardBody>
             <Link to={'/'}>
               <BackButton>Back</BackButton>
             </Link>
-
+            {loader && <Loader />}
             <NewsBlock>
               <NewsTitle>{itemNews.title}</NewsTitle>
               <NewsInfo>
@@ -45,7 +48,14 @@ export default function ItemPage() {
                 comments
               </NewsInfo>
             </NewsBlock>
-            <UpdateItemButton onClick={() => setUpdater(!updater)}>Update</UpdateItemButton>
+            <UpdateItemButton
+              onClick={() => {
+                setUpdater(!updater);
+                setLoader(true);
+              }}
+            >
+              Update
+            </UpdateItemButton>
             <Comments comments={itemNews.comments} />
           </CardBody>
         </Card>

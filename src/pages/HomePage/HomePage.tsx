@@ -3,14 +3,17 @@ import { Link } from 'react-router-dom';
 import GetListNews from 'API/GetListNews';
 import { FeedItemSchema } from 'schemes/FeedItemSchema';
 import { Main, Card, CardBody, NewsNumber, NewsInfo, NewsBlock, UpdateNewsButton } from './HomePageStyles';
+import Loader from 'components/Loader/Loader';
 
 export default function HomePage() {
   const [news, setNews] = useState<FeedItemSchema[]>([]);
   const [updater, setUpdater] = useState(false);
+  const [loader, setLoader] = useState(true);
 
   const GetResponse = async () => {
     const response = await GetListNews();
     setNews(response.map((promise) => promise.data).flat());
+    setLoader(false);
   };
 
   useEffect(() => {
@@ -23,8 +26,17 @@ export default function HomePage() {
 
   return (
     <Main>
-      <UpdateNewsButton onClick={() => setUpdater(!updater)}>Update</UpdateNewsButton>
+      <UpdateNewsButton
+        onClick={() => {
+          setUpdater(!updater);
+          setLoader(true);
+        }}
+      >
+        Update
+      </UpdateNewsButton>
+      {loader && <Loader />}
       {news &&
+        !loader &&
         news.slice(0, 100).map((item, index) => {
           return (
             <Card key={index} bgColor={index % 2 == 0 ? 'Khaki' : 'PaleGoldenrod'}>
