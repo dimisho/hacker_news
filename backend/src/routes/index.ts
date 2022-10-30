@@ -1,5 +1,5 @@
 import router from 'koa-router';
-const NewsController = require('@/controllers/newsController');
+const NewsController = require('@/controllers/NewsController');
 
 const rout = router();
 
