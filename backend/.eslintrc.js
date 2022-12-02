@@ -3,21 +3,8 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: [
-    require.resolve('./base'),
-    'eslint:recommended',
-    'plugin:react/recommended',
-    'plugin:@typescript-eslint/recommended',
-  ],
-  parser: '@typescript-eslint/parser',
-  parserOptions: {
-    ecmaFeatures: {
-      jsx: true,
-    },
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-  },
-  plugins: ['react', '@typescript-eslint', 'react-hooks'],
+  extends: [require.resolve('./eslint-base-config'), 'plugin:react/recommended'],
+  plugins: ['@typescript-eslint'],
   settings: {
     'import/resolver': {
       alias: {
