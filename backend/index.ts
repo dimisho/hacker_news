@@ -4,16 +4,12 @@ import bodyParser from 'koa-bodyparser';
 import json from 'koa-json';
 import logger from 'koa-logger';
 import cors from '@koa/cors';
-import { faker } from '@faker-js/faker';
-import NewsModel from '@/db/models/news.model';
-import CommentModel from '@/db/models/comment.model';
-import rout from '@/routes/index';
+import routes from '@/routes/index';
 
 dotenv.config({ path: require('find-config')('.env') });
 
 async function main() {
-  const { initModels } = await import('@/db/db');
-  const { initDB } = await import('@/db/db');
+  const { initModels, initDB } = await import('@/db');
   const app = new Koa();
   const PORT = process.env.PORT;
 
@@ -25,7 +21,7 @@ async function main() {
   app.use(bodyParser());
   app.use(cors());
 
-  app.use(rout.routes());
+  app.use(routes.routes());
 
   app.listen(PORT);
   console.info(`Server started: http://localhost:${PORT}`);

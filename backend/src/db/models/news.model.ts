@@ -1,8 +1,28 @@
 import { Table, Column, Model, HasMany, PrimaryKey, AutoIncrement } from 'sequelize-typescript';
+import { Optional } from 'sequelize';
 import CommentModel from './comment.model';
 
-@Table({ underscored: true, paranoid: true, tableName: 'news' })
-export default class NewsModel extends Model {
+interface NewsAttributes {
+  id: number;
+  title: string;
+  points?: number;
+  user?: string;
+  time: number;
+  time_ago: string;
+  content: string;
+  deleted?: boolean;
+  dead?: boolean;
+  type: string;
+  url?: string;
+  domain: string;
+  level: number;
+  comments_count: number;
+}
+
+interface NewsCreationAttributes extends Optional<NewsAttributes, 'id'> {}
+
+@Table({ underscored: true, tableName: 'news' })
+export default class NewsModel extends Model<NewsAttributes, NewsCreationAttributes> {
   @PrimaryKey
   @AutoIncrement
   @Column

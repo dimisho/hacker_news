@@ -1,8 +1,30 @@
 import { Table, Column, Model, HasMany, PrimaryKey, AutoIncrement, BelongsTo, ForeignKey } from 'sequelize-typescript';
+import { Optional } from 'sequelize';
 import NewsModel from './news.model';
 
-@Table({ underscored: true, paranoid: true, tableName: 'comments' })
-export default class CommentModel extends Model {
+interface CommentAttributes {
+  id: number;
+  newsId?: number;
+  commentId?: number;
+  title: string;
+  points?: number;
+  user?: string;
+  time: number;
+  time_ago: string;
+  content: string;
+  deleted?: boolean;
+  dead?: boolean;
+  type: string;
+  url?: string;
+  domain: string;
+  level: number;
+  comments_count: number;
+}
+
+interface CommentCreationAttributes extends Optional<CommentAttributes, 'id'> {}
+
+@Table({ underscored: true, tableName: 'comments' })
+export default class CommentModel extends Model<CommentAttributes, CommentCreationAttributes> {
   @PrimaryKey
   @AutoIncrement
   @Column
@@ -56,7 +78,7 @@ export default class CommentModel extends Model {
   declare comments_count: number;
 
   @HasMany(() => CommentModel)
-  declare comments: CommentModel;
+  declare comments: CommentModel[];
 
   @BelongsTo(() => NewsModel)
   declare parentNews: NewsModel;

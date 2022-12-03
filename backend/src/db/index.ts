@@ -22,15 +22,15 @@ export async function initDB() {
   for (let i = 0; i < numberOfNews; i++) {
     const { id } = await NewsModel.create({
       title: faker.vehicle.vehicle(),
-      points: faker.random.numeric(2),
+      points: Number(faker.random.numeric(2)),
       user: faker.internet.userName(),
-      time: faker.random.numeric(9),
+      time: Number(faker.random.numeric(9)),
       time_ago: '3 min',
       content: faker.hacker.phrase(),
       type: 'newsType',
       url: faker.internet.url(),
       domain: faker.internet.domainName(),
-      level: faker.random.numeric(1),
+      level: Number(faker.random.numeric(1)),
       comments_count: commentsCount,
     });
 
@@ -39,15 +39,15 @@ export async function initDB() {
 
       const comment = await CommentModel.create({
         title: faker.vehicle.vehicle(),
-        points: faker.random.numeric(2),
+        points: Number(faker.random.numeric(2)),
         user: faker.internet.userName(),
-        time: faker.random.numeric(9),
+        time: Number(faker.random.numeric(9)),
         time_ago: '1 min',
         content: faker.hacker.phrase(),
         type: 'commentType',
         url: faker.internet.url(),
         domain: faker.internet.domainName(),
-        level: faker.random.numeric(1),
+        level: Number(faker.random.numeric(1)),
         comments_count: numberOfNestedComments,
         newsId: id,
       });
@@ -55,15 +55,15 @@ export async function initDB() {
       for (let i = 0; i < numberOfNestedComments; i++) {
         await CommentModel.create({
           title: faker.vehicle.vehicle(),
-          points: faker.random.numeric(2),
+          points: Number(faker.random.numeric(2)),
           user: faker.internet.userName(),
-          time: faker.random.numeric(9),
+          time: Number(faker.random.numeric(9)),
           time_ago: '1 min',
           content: faker.hacker.phrase(),
           type: 'commentType',
           url: faker.internet.url(),
           domain: faker.internet.domainName(),
-          level: faker.random.numeric(1),
+          level: Number(faker.random.numeric(1)),
           comments_count: 0,
           commentId: comment.id,
         });
@@ -72,15 +72,15 @@ export async function initDB() {
   }
   await CommentModel.create({
     title: faker.vehicle.vehicle(),
-    points: faker.random.numeric(2),
+    points: Number(faker.random.numeric(2)),
     user: faker.internet.userName(),
-    time: faker.random.numeric(9),
+    time: Number(faker.random.numeric(9)),
     time_ago: '1 min',
     content: faker.hacker.phrase(),
     type: 'commentType',
     url: faker.internet.url(),
     domain: faker.internet.domainName(),
-    level: faker.random.numeric(1),
+    level: Number(faker.random.numeric(1)),
     comments_count: 0,
     newsId: 1,
   });

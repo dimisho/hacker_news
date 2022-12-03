@@ -1,9 +1,9 @@
 import router from 'koa-router';
-const NewsController = require('@/controllers/NewsController');
+import NewsController from '@/controllers/NewsController';
 
-const rout = router();
+const routes = router();
 
-rout.get('/newest/:page', NewsController.getAll);
-rout.get('/item/:id', NewsController.getOne);
+routes.get('/newest/:page', NewsController.getAll);
+routes.get('/item/:id', NewsController.getOne);
 
-export default rout;
+export default routes;
