@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { CommentBlock, AuthorComment, ShowMoreButton } from './Styles/CommentStyles';
 import { ItemSchema } from 'schemes/ItemSchema';
+import moment from 'moment';
 
 interface CommentProps {
   comment: ItemSchema;
@@ -11,10 +12,10 @@ const Comment: React.FC<CommentProps> = ({ comment, propsMarginLeft = '0px' }) =
   return (
     <CommentBlock marginLeft={propsMarginLeft}>
       <AuthorComment>
-        {comment.user} | {comment.time_ago}
+        {comment.user} | {moment(new Date(comment.time)).fromNow()}
       </AuthorComment>
       <div dangerouslySetInnerHTML={{ __html: `${comment.content}` }} />
-      {comment.comments_count > 0 && !commentTree && (
+      {comment.comments?.length > 0 && !commentTree && (
         <ShowMoreButton
           onClick={() => {
             setCommentTree(true);

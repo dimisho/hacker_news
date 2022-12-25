@@ -1,7 +1,8 @@
 import NewsModel from '@/db/models/news.model';
+import { Context } from 'koa';
 
 class NewsController {
-  async getAll(ctx) {
+  async getAll(ctx: Context) {
     const { page } = ctx.params;
 
     const news = await NewsModel.findAll({
@@ -13,7 +14,7 @@ class NewsController {
     ctx.body = news;
   }
 
-  async getOne(ctx) {
+  async getOne(ctx: Context) {
     const { id } = ctx.params;
 
     const oneOfNews = await NewsModel.findOne({

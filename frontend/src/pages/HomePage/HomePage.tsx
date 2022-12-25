@@ -4,6 +4,7 @@ import GetListNews from 'API/GetListNews';
 import { FeedItemSchema } from 'schemes/FeedItemSchema';
 import { Main, Card, CardBody, NewsNumber, NewsInfo, NewsBlock, UpdateNewsButton } from './HomePageStyles';
 import Loader from 'components/Loader/Loader';
+import moment from 'moment';
 
 export default function HomePage() {
   const [news, setNews] = useState<FeedItemSchema[]>([]);
@@ -50,7 +51,7 @@ export default function HomePage() {
                 <NewsBlock>
                   <Link to={`/${item.id}`}>{item.title}</Link>
                   <NewsInfo>
-                    {item?.points} points | by {item?.user} | {new Date(item.time * 1000).toLocaleString('ru')}
+                    {item?.points} points | by {item?.user} | {moment(new Date(item.time)).fromNow()}
                   </NewsInfo>
                 </NewsBlock>
               </CardBody>

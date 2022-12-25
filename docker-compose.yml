@@ -10,6 +10,8 @@ services:
       - db
     volumes:
       - ./backend:/app
+    environment:
+      - NODE_ENV=production
     container_name: hacker-news-backend
   frontend:
     build:

@@ -7,16 +7,13 @@ interface NewsAttributes {
   title: string;
   points?: number;
   user?: string;
-  time: number;
-  time_ago: string;
+  time: Date;
   content: string;
   deleted?: boolean;
   dead?: boolean;
   type: string;
   url?: string;
   domain: string;
-  level: number;
-  comments_count: number;
 }
 
 interface NewsCreationAttributes extends Optional<NewsAttributes, 'id'> {}
@@ -38,10 +35,7 @@ export default class NewsModel extends Model<NewsAttributes, NewsCreationAttribu
   declare user?: string;
 
   @Column
-  declare time: number;
-
-  @Column
-  declare time_ago: string;
+  declare time: Date;
 
   @Column
   declare content: string;
@@ -60,12 +54,6 @@ export default class NewsModel extends Model<NewsAttributes, NewsCreationAttribu
 
   @Column
   declare domain: string;
-
-  @Column
-  declare level: number;
-
-  @Column
-  declare comments_count: number;
 
   @HasMany(() => CommentModel)
   declare comments: CommentModel[];

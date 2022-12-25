@@ -4,21 +4,18 @@ import NewsModel from './news.model';
 
 interface CommentAttributes {
   id: number;
-  newsId?: number;
-  commentId?: number;
+  news_id?: number;
+  comment_id?: number;
   title: string;
   points?: number;
   user?: string;
-  time: number;
-  time_ago: string;
+  time: Date;
   content: string;
   deleted?: boolean;
   dead?: boolean;
   type: string;
   url?: string;
   domain: string;
-  level: number;
-  comments_count: number;
 }
 
 interface CommentCreationAttributes extends Optional<CommentAttributes, 'id'> {}
@@ -32,11 +29,11 @@ export default class CommentModel extends Model<CommentAttributes, CommentCreati
 
   @ForeignKey(() => NewsModel)
   @Column
-  declare newsId?: number;
+  declare news_id?: number;
 
   @ForeignKey(() => CommentModel)
   @Column
-  declare commentId?: number;
+  declare comment_id?: number;
 
   @Column
   declare title: string;
@@ -48,10 +45,7 @@ export default class CommentModel extends Model<CommentAttributes, CommentCreati
   declare user?: string;
 
   @Column
-  declare time: number;
-
-  @Column
-  declare time_ago: string;
+  declare time: Date;
 
   @Column
   declare content: string;
@@ -71,15 +65,9 @@ export default class CommentModel extends Model<CommentAttributes, CommentCreati
   @Column
   declare domain: string;
 
-  @Column
-  declare level: number;
-
-  @Column
-  declare comments_count: number;
-
   @HasMany(() => CommentModel)
   declare comments: CommentModel[];
 
   @BelongsTo(() => NewsModel)
-  declare parentNews: NewsModel;
+  declare news: NewsModel;
 }

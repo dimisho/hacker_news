@@ -3,7 +3,6 @@ import Koa from 'koa';
 import bodyParser from 'koa-bodyparser';
 import json from 'koa-json';
 import logger from 'koa-logger';
-import cors from '@koa/cors';
 import routes from '@/routes/index';
 
 dotenv.config({ path: require('find-config')('.env') });
@@ -19,7 +18,11 @@ async function main() {
   app.use(json());
   app.use(logger());
   app.use(bodyParser());
-  app.use(cors());
+  app.use(async (ctx, next) => {
+    ctx.set('Access-Control-Allow-Origin', process.env.REACT_APP_URL ?? '');
+    ctx.set('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE');
+    await next();
+  });
 
   app.use(routes.routes());
 

@@ -12,8 +12,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@faker-js/faker": "^7.6.0",
     "@koa/cors": "^4.0.0",
-    "cors": "^2.8.5",
     "cross-env": "^7.0.3",
     "dotenv": "^16.0.3",
     "find-config": "^1.0.0",
@@ -22,12 +22,12 @@
     "koa-json": "^2.0.2",
     "koa-logger": "^3.2.1",
     "koa-router": "^12.0.0",
+    "moment": "^2.29.4",
     "pg": "^8.8.0",
     "sequelize": "^6.26.0",
     "sequelize-typescript": "^2.1.5"
   },
   "devDependencies": {
-    "@faker-js/faker": "^7.6.0",
     "@typescript-eslint/eslint-plugin": "^5.40.1",
     "@typescript-eslint/parser": "^5.40.1",
     "eslint": "^8.25.0",

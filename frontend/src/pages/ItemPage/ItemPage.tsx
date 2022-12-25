@@ -44,8 +44,7 @@ export default function ItemPage() {
                 ) : (
                   <p>No link</p>
                 )}
-                {new Date(itemNews.time * 1000).toLocaleString()} | by {itemNews.user} | {itemNews.comments_count}{' '}
-                comments
+                {new Date(itemNews.time).toLocaleString()} | by {itemNews.user} | {itemNews.comments?.length} comments
               </NewsInfo>
             </NewsBlock>
             <UpdateItemButton
