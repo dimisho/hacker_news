@@ -13,7 +13,7 @@ const sequelize = new Sequelize({ ...DB_CONFIG, logging: false });
 export async function initModels() {
   await sequelize.authenticate();
   sequelize.addModels([`${__dirname}/**/*.model.*`]);
-  await sequelize.sync({ force: true });
+  await sequelize.sync();
 }
 
 export async function initDB() {

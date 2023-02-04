@@ -8,12 +8,11 @@ import routes from '@/routes/index';
 dotenv.config({ path: require('find-config')('.env') });
 
 async function main() {
-  const { initModels, initDB } = await import('@/db');
+  const { initModels } = await import('@/db');
   const app = new Koa();
   const PORT = process.env.PORT;
 
   await initModels();
-  await initDB();
 
   app.use(json());
   app.use(logger());
