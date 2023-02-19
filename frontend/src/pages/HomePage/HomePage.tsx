@@ -2,50 +2,60 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import GetListNews from 'API/GetListNews';
 import { FeedItemSchema } from 'schemes/FeedItemSchema';
-import { Main, Card, CardBody, NewsNumber, NewsInfo, NewsBlock, UpdateNewsButton } from './HomePageStyles';
+import { Main, Card, CardBody, NewsNumber, NewsInfo, NewsBlock, StyledButton } from './HomePageStyles';
 import Loader from 'components/Loader/Loader';
 import moment from 'moment';
+import Modal from 'components/Modal/Modal';
 
 export default function HomePage() {
   const [news, setNews] = useState<FeedItemSchema[]>([]);
-  const [updater, setUpdater] = useState(false);
   const [loader, setLoader] = useState(true);
   const [page, setPage] = useState(1);
 
-  const GetResponse = useCallback(async () => {
+  const [showModalParent, setShowModalParent] = useState(false);
+  const [showModalChild, setShowModalChild] = useState(false);
+
+  const getResponse = useCallback(async () => {
+    const timeOut = setTimeout(() => setLoader(true), 100);
     const response = await GetListNews(page);
-    if (response.data.length == 0) {
-      setPage(page - 1);
-      return;
-    }
     setNews(response.data);
+    clearTimeout(timeOut);
     setLoader(false);
   }, [page]);
 
   useEffect(() => {
-    GetResponse();
-    const timer = setInterval(() => {
-      GetResponse();
-    }, 60000);
+    getResponse();
+    const timer = setInterval(() => getResponse(), 60000);
+
     return () => clearInterval(timer);
-  }, [updater, GetResponse]);
+  }, [getResponse]);
 
   return (
     <Main>
-      <UpdateNewsButton
-        onClick={() => {
-          setUpdater(!updater);
-          setLoader(true);
-        }}
-      >
-        Update
-      </UpdateNewsButton>
+      <div>
+        <button onClick={() => setShowModalParent(true)}>Открыть родительскую модальку</button>
+        <Modal visible={showModalParent} onClose={() => setShowModalParent(false)} closeOnEscape={false}>
+          <div>
+            <h1>Родительская модалька</h1>
+            <button onClick={() => setShowModalChild(true)}>Открыть дочернюю модальку</button>
+            <button onClick={() => setShowModalParent(false)}>Закрыть</button>
+          </div>
+        </Modal>
+        <Modal visible={showModalChild} onClose={() => setShowModalChild(false)} closeOnEscape={true} important>
+          <div>
+            <h1>Дочерняя модалька</h1>
+            <button onClick={() => setShowModalChild(false)}>Закрыть</button>
+          </div>
+        </Modal>
+      </div>
+
+      <StyledButton onClick={() => getResponse()}>Update</StyledButton>
       {loader && <Loader />}
-      {news &&
+      {!!news.length &&
         !loader &&
         news.slice(0, 100).map((item, index) => {
           return (
-            <Card key={index} bgColor={index % 2 == 0 ? 'Khaki' : 'PaleGoldenrod'}>
+            <Card key={index} variant={index % 2 == 0 ? 'primary' : 'secondary'}>
               <CardBody>
                 <NewsNumber>{index + 1 + (page - 1) * 10}. </NewsNumber>
                 <NewsBlock>
@@ -58,24 +68,12 @@ export default function HomePage() {
             </Card>
           );
         })}
-      <UpdateNewsButton
-        onClick={() => {
-          setUpdater(!updater);
-          setLoader(true);
-          page > 1 && setPage(page - 1);
-        }}
-      >
+      <StyledButton onClick={() => setPage(page - 1)} disabled={page === 1}>
         Previous Page
-      </UpdateNewsButton>
-      <UpdateNewsButton
-        onClick={() => {
-          setUpdater(!updater);
-          setLoader(true);
-          setPage(page + 1);
-        }}
-      >
+      </StyledButton>
+      <StyledButton onClick={() => setPage(page + 1)} disabled={news.length < 10}>
         Next Page
-      </UpdateNewsButton>
+      </StyledButton>
     </Main>
   );
 }

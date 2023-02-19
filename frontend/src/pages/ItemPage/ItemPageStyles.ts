@@ -1,3 +1,4 @@
+import { defaultColors, ThemeVariantType } from 'const/defaultColors';
 import styled from 'styled-components';
 
 export const Main = styled.div`
@@ -7,8 +8,8 @@ export const Main = styled.div`
   width: 100%;
 `;
 
-export const Card = styled.div<{ bgColor: string }>`
-  background-color: ${(props) => props.bgColor};
+export const Card = styled.div`
+  background-color: ${defaultColors.card.primary};
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
   border-radius: 5px;
   margin-bottom: 10px;
@@ -26,7 +27,7 @@ export const CardBody = styled.div`
     text-decoration: none;
   }
   a:hover {
-    color: DarkSlateGrey;
+    color: ${defaultColors.text.primary};
   }
 `;
 
@@ -35,18 +36,15 @@ export const BackButton = styled.button`
   width: 10%;
   text-decoration: none;
   user-select: none;
-  background-color: PeachPuff;
+  background-color: ${defaultColors.bgButton.primary};
   padding: 10px;
   border: none;
   border-radius: 5px;
   font-family: Verdana;
   font-size: 10pt;
   :hover {
-    background-color: #ffecdb;
+    background-color: ${defaultColors.hoverButton.primary};
     cursor: pointer;
-  }
-  :active {
-    background-color: #ffecdb;
   }
 `;
 
@@ -68,17 +66,14 @@ export const UpdateItemButton = styled.button`
   margin: 20px;
   text-decoration: none;
   user-select: none;
-  background-color: PeachPuff;
+  background-color: ${defaultColors.bgButton.primary};
   padding: 10px;
   border: none;
   border-radius: 5px;
   font-family: Verdana;
   font-size: 10pt;
   :hover {
-    background-color: #ffecdb;
+    background-color: ${defaultColors.hoverButton.primary};
     cursor: pointer;
-  }
-  :active {
-    background-color: #ffecdb;
   }
 `;

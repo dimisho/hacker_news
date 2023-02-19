@@ -1,11 +1,10 @@
-import dotenv from 'dotenv';
+import 'dotenv/config';
 import Koa from 'koa';
 import bodyParser from 'koa-bodyparser';
 import json from 'koa-json';
 import logger from 'koa-logger';
 import routes from '@/routes/index';
-
-dotenv.config({ path: require('find-config')('.env') });
+import cors from '@koa/cors';
 
 async function main() {
   const { initModels } = await import('@/db');
@@ -17,11 +16,11 @@ async function main() {
   app.use(json());
   app.use(logger());
   app.use(bodyParser());
-  app.use(async (ctx, next) => {
-    ctx.set('Access-Control-Allow-Origin', process.env.REACT_APP_URL ?? '');
-    ctx.set('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE');
-    await next();
-  });
+  app.use(
+    cors({
+      origin: process.env.REACT_APP_URL,
+    }),
+  );
 
   app.use(routes.routes());
 

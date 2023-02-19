@@ -1,7 +1,8 @@
+import { defaultColors } from 'const/defaultColors';
 import styled from 'styled-components';
 
 export const CommentBlock = styled.div<{ marginLeft: `${number}px` }>`
-  background-color: Khaki;
+  background-color: ${defaultColors.card.primary};
   border-radius: 5px;
   padding: 5px;
   margin-bottom: 10px;
@@ -21,17 +22,14 @@ export const ShowMoreButton = styled.button`
   width: 10%;
   text-decoration: none;
   user-select: none;
-  background-color: PeachPuff;
+  background-color: ${defaultColors.bgButton.primary};
   padding: 10px;
   border: none;
   border-radius: 5px;
   font-family: Verdana;
   font-size: 10pt;
   :hover {
-    background-color: #ffecdb;
+    background-color: ${defaultColors.hoverButton.primary};
     cursor: pointer;
-  }
-  :active {
-    background-color: #ffecdb;
   }
 `;
