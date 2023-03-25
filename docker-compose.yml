@@ -1,0 +1,34 @@
+version: "3"
+services:
+  backend:
+    build:
+      dockerfile: Dockerfile
+      context: ./backend
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+    volumes:
+      - ./backend:/app
+    environment:
+      - NODE_ENV=production
+    container_name: hacker-news-backend
+  frontend:
+    build:
+      dockerfile: Dockerfile
+      context: ./frontend
+    volumes:
+      - ./frontend:/app
+    ports:
+      - "3000:3000"
+    container_name: hacker-news-frontend
+  db:
+    image: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: databaza1
+      POSTGRES_DB: hacker_news
+    container_name: hacker-news-db

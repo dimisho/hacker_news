@@ -1,0 +1,7 @@
+const path = require('path');
+const isDev = (process.env.NODE_ENV || 'development') === 'development';
+
+module.exports = {
+  config: path.resolve(isDev ? 'src' : 'build/src', 'db', 'db.config.js'),
+  'seeders-path': path.resolve(isDev ? 'src' : 'build/src', 'db', 'seeders'),
+};
